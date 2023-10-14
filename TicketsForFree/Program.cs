@@ -22,6 +22,7 @@ namespace TicketsForFree
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IJourneyService, JourneyService>();
+            builder.Services.AddScoped<ISeatService, SeatService>();
             builder.Services.AddDbContext<TicketsDbContext>();
            
             var app = builder.Build();
