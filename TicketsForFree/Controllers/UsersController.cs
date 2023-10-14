@@ -13,9 +13,9 @@ namespace TicketsForFree.Controllers
     {
 
 
-        private readonly IUserServices _userService;
+        private readonly IUserService _userService;
 
-        public UsersController(IUserServices userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
@@ -29,7 +29,7 @@ namespace TicketsForFree.Controllers
           return Ok(users);
        }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
             var user = await _userService.Get(id);

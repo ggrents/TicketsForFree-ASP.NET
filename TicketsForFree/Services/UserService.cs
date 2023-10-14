@@ -6,7 +6,7 @@ using TicketsForFree.Models;
 
 namespace TicketsForFree.Services
 {
-    public class UserService : IUserServices
+    public class UserService : IUserService
 
     {
 

@@ -2,7 +2,7 @@
 
 namespace TicketsForFree.Services
 {
-    public interface IUserServices
+    public interface IUserService
     {
         public Task<IEnumerable<User>> GetAll();
         public Task<User?> Get(int id);

@@ -1,15 +1,14 @@
-﻿namespace TicketsForFree.Models
+﻿namespace TicketsForFree.ViewModels
 {
-    public class Ticket
+    public class CreateUpdateJourneyViewModel
     {
-        public int TicketId { get; set; }
         public string? Transport { get; set; }
         public string? DepartureCity { get; set; }
         public string? ArrivalCity { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
         public decimal Price { get; set; }
+        public int Capacity { get; set; }
 
-        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }

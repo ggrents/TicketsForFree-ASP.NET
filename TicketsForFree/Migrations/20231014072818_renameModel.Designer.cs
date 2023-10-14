@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketsForFree.Data;
 
@@ -11,9 +12,11 @@ using TicketsForFree.Data;
 namespace TicketsForFree.Migrations
 {
     [DbContext(typeof(TicketsDbContext))]
-    partial class TicketsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014072818_renameModel")]
+    partial class renameModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,9 +73,6 @@ namespace TicketsForFree.Migrations
                     b.Property<int>("JourneyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -80,30 +80,9 @@ namespace TicketsForFree.Migrations
 
                     b.HasIndex("JourneyId");
 
-                    b.HasIndex("SeatId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("TicketsForFree.Models.Seat", b =>
-                {
-                    b.Property<int>("SeatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SeatId"));
-
-                    b.Property<bool>("IsReserved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsVIP")
-                        .HasColumnType("bit");
-
-                    b.HasKey("SeatId");
-
-                    b.ToTable("Seats");
                 });
 
             modelBuilder.Entity("TicketsForFree.Models.User", b =>
@@ -139,12 +118,6 @@ namespace TicketsForFree.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TicketsForFree.Models.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TicketsForFree.Models.User", "User")
                         .WithMany("Reservations")
                         .HasForeignKey("UserId")
@@ -152,8 +125,6 @@ namespace TicketsForFree.Migrations
                         .IsRequired();
 
                     b.Navigation("Journey");
-
-                    b.Navigation("Seat");
 
                     b.Navigation("User");
                 });

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TicketsForFree.Data;
 
 using TicketsForFree.Services;
+using TicketsForFree.Services.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TicketsForFree
@@ -19,7 +20,8 @@ namespace TicketsForFree
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IUserServices, UserService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IJourneyService, JourneyService>();
             builder.Services.AddDbContext<TicketsDbContext>();
            
             var app = builder.Build();

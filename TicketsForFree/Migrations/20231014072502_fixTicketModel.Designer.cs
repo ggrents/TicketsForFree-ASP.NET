@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketsForFree.Data;
 
@@ -11,9 +12,11 @@ using TicketsForFree.Data;
 namespace TicketsForFree.Migrations
 {
     [DbContext(typeof(TicketsDbContext))]
-    partial class TicketsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014072502_fixTicketModel")]
+    partial class fixTicketModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,13 +25,39 @@ namespace TicketsForFree.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TicketsForFree.Models.Journey", b =>
+            modelBuilder.Entity("TicketsForFree.Models.Reservation", b =>
                 {
-                    b.Property<int>("JourneyId")
+                    b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JourneyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
+
+                    b.Property<DateTime>("BookingTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationId");
+
+                    b.HasIndex("TicketId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("TicketsForFree.Models.Ticket", b =>
+                {
+                    b.Property<int>("TicketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"));
 
                     b.Property<string>("ArrivalCity")
                         .HasColumnType("nvarchar(max)");
@@ -51,59 +80,9 @@ namespace TicketsForFree.Migrations
                     b.Property<string>("Transport")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("JourneyId");
+                    b.HasKey("TicketId");
 
                     b.ToTable("Journey");
-                });
-
-            modelBuilder.Entity("TicketsForFree.Models.Reservation", b =>
-                {
-                    b.Property<int>("ReservationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
-
-                    b.Property<DateTime>("BookingTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("JourneyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReservationId");
-
-                    b.HasIndex("JourneyId");
-
-                    b.HasIndex("SeatId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("TicketsForFree.Models.Seat", b =>
-                {
-                    b.Property<int>("SeatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SeatId"));
-
-                    b.Property<bool>("IsReserved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsVIP")
-                        .HasColumnType("bit");
-
-                    b.HasKey("SeatId");
-
-                    b.ToTable("Seats");
                 });
 
             modelBuilder.Entity("TicketsForFree.Models.User", b =>
@@ -133,15 +112,9 @@ namespace TicketsForFree.Migrations
 
             modelBuilder.Entity("TicketsForFree.Models.Reservation", b =>
                 {
-                    b.HasOne("TicketsForFree.Models.Journey", "Journey")
+                    b.HasOne("TicketsForFree.Models.Ticket", "Ticket")
                         .WithMany("Reservations")
-                        .HasForeignKey("JourneyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TicketsForFree.Models.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId")
+                        .HasForeignKey("TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -151,14 +124,12 @@ namespace TicketsForFree.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Journey");
-
-                    b.Navigation("Seat");
+                    b.Navigation("Ticket");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TicketsForFree.Models.Journey", b =>
+            modelBuilder.Entity("TicketsForFree.Models.Ticket", b =>
                 {
                     b.Navigation("Reservations");
                 });

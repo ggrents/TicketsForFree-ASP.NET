@@ -11,8 +11,9 @@ namespace TicketsForFree.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Journey> Journeys { get; set; }
         public DbSet<Reservation> Reservations  { get; set; }
+        public DbSet<Seat> Seats  { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
