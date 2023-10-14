@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using TicketsForFree.Data;
+
+using TicketsForFree.Services;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace TicketsForFree
 {
     public class Program
@@ -13,6 +19,9 @@ namespace TicketsForFree
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IUserServices, UserService>();
+            builder.Services.AddDbContext<TicketsDbContext>();
+           
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,7 +35,7 @@ namespace TicketsForFree
 
             app.UseAuthorization();
 
-
+          
             app.MapControllers();
 
             app.Run();
