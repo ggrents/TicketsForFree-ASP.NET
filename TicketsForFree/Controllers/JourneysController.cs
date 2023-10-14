@@ -180,22 +180,22 @@ namespace TicketsForFree.Controllers
                     existingJourney.ArrivalCity = updatedJourney.ArrivalCity;
                 }
 
-                if (updatedJourney.DepartureTime != null)
+                if (updatedJourney.DepartureTime != DateTime.MinValue)
                 {
                     existingJourney.DepartureTime = updatedJourney.DepartureTime;
                 }
 
-                if (updatedJourney.ArrivalTime != null)
+                if (updatedJourney.ArrivalTime != DateTime.MinValue)
                 {
                     existingJourney.ArrivalTime = updatedJourney.ArrivalTime;
                 }
 
-                if (updatedJourney.Price != null)
+                if (updatedJourney.Price != 0)
                 {
                     existingJourney.Price = updatedJourney.Price;
                 }
 
-                if (updatedJourney.Capacity != null)
+                if (updatedJourney.Capacity != 0)
                 {
                     existingJourney.Capacity = updatedJourney.Capacity;
                 }

@@ -14,6 +14,7 @@ namespace TicketsForFree.Data
         public DbSet<Journey> Journeys { get; set; }
         public DbSet<Reservation> Reservations  { get; set; }
         public DbSet<Seat> Seats  { get; set; }
+        public DbSet<Voyage> Voyages  { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

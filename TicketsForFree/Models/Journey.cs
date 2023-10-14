@@ -16,6 +16,7 @@ namespace TicketsForFree.Models
 
         public int Capacity { get; set; }
 
+
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 }

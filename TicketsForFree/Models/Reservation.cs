@@ -10,7 +10,7 @@
 
         public int SeatId { get; set; }
 
-        public Seat Seat { get; set; }
+        public Seat? Seat { get; set; }
         public DateTime BookingTime { get; set; }
     }
 }
