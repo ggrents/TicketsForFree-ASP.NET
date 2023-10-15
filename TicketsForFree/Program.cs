@@ -14,10 +14,10 @@ namespace TicketsForFree
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers().AddJsonOptions(x =>x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -27,15 +27,14 @@ namespace TicketsForFree
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IJourneyService, JourneyService>();
             builder.Services.AddScoped<ISeatService, SeatService>();
-<<<<<<< HEAD
+
             builder.Services.AddScoped<IReservationService, ReservationService>();
-=======
->>>>>>> cb32489a51433bf8958d45d859864c9408c31f75
+
             builder.Services.AddDbContext<TicketsDbContext>();
            
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+           
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
