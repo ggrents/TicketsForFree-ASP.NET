@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ﻿
 using Microsoft.EntityFrameworkCore;
 using TicketsForFree.Data;
@@ -74,11 +74,5 @@ namespace TicketsForFree.Services
         }
 
         
-=======
-﻿namespace TicketsForFree.Services
-{
-    public class SeatService
-    {
->>>>>>> cb32489a51433bf8958d45d859864c9408c31f75
-    }
+}
 }
